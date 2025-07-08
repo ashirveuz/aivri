@@ -6,6 +6,7 @@ use App\Filament\Resources\ProductResource\Pages;
 use App\Filament\Resources\ProductResource\RelationManagers;
 use App\Models\Product;
 use Filament\Forms;
+use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -18,6 +19,7 @@ use Filament\Forms\Components\Textarea;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Support\Str;
+use Filament\Forms\Components\Select; // <-- Add this import
 
 
 class ProductResource extends Resource
@@ -33,49 +35,119 @@ class ProductResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('name')
-                    ->required()
-                    ->maxLength(255),
+                // Fieldset for Basic Product Info
+                Fieldset::make('Basic Info')
+                    ->schema([
+                        TextInput::make('name')
+                            ->required()
+                            ->maxLength(255),
 
-                TextInput::make('code')
-                    ->label('Product Code')
-                    ->unique(ignoreRecord: true)
-                    ->disabled(fn($record) => $record !== null)
-                    ->maxLength(20)
-                    ->required(),
+                        TextInput::make('code')
+                            ->label('Product Code')
+                            ->unique(ignoreRecord: true)
+                            ->disabled(fn($record) => $record !== null)
+                            ->maxLength(20)
+                            ->required(),
+                    ])
+                    ->columns(2),
 
-                TextInput::make('price')
-                    ->numeric()
-                    ->required()
-                    ->prefix('$'),
+                // Fieldset for Pricing Information
+                Fieldset::make('Pricing Info')
+                    ->schema([
+                        TextInput::make('price')
+                            ->numeric()
+                            ->required()
+                            ->prefix('$'),
 
-                TextInput::make('offer_percentage')
-                    ->numeric()
-                    ->minValue(0)
-                    ->maxValue(100)
-                    ->suffix('%')
-                    ->label('Offer (%)')
-                    ->hint('Leave blank if no discount'),
+                        TextInput::make('offer_percentage')
+                            ->numeric()
+                            ->minValue(0)
+                            ->maxValue(100)
+                            ->suffix('%')
+                            ->label('Offer (%)')
+                            ->hint('Leave blank if no discount'),
+                    ])
+                    ->columns(2),
 
-                Textarea::make('description')
-                    ->rows(4)
-                    ->columnSpanFull(),
+                // Fieldset for Product Features
+                Fieldset::make('Product Features')
+                    ->schema([
+                        Textarea::make('key_features')
+                            ->label('Key Features')
+                            ->rows(5)
+                            ->placeholder('Enter product features like "Industry-leading noise cancellation", "30-hour battery life", etc.')
+                            ->hint('Separate each feature with a newline or bullet point'),
 
-                FileUpload::make('main_image')
-                    ->label('Main Image')
-                    ->directory('products/main')
-                    ->image()
-                    ->required()
-                    ->imagePreviewHeight('150'),
+                        Textarea::make('specifications')
+                            ->label('Specifications')
+                            ->rows(5)
+                            ->placeholder('Enter specifications like "Lotion Type", "Care Instruction", etc.')
+                            ->hint('Enter each specification in a new line'),
 
-                FileUpload::make('gallery_images')
-                    ->label('Gallery Images')
-                    ->directory('products/gallery')
-                    ->multiple()
-                    ->reorderable()
-                    ->image()
-                    ->imagePreviewHeight('100')
-                    ->maxFiles(6),
+                        Textarea::make('about_item')
+                            ->label('About this Item')
+                            ->rows(5)
+                            ->placeholder('Enter details about the item, such as "Lotion Type", "Use", etc.')
+                            ->hint('Provide detailed information about this item'),
+                    ])
+                    ->columns(1),
+
+                // Fieldset for Color and Size
+                Fieldset::make('Color & Size')
+                    ->schema([
+                        Select::make('color')
+                            ->label('Color')
+                            ->options([
+                                'red' => 'Red',
+                                'blue' => 'Blue',
+                                'green' => 'Green',
+                                'black' => 'Black',
+                                'white' => 'White',
+                                // Add more colors as needed
+                            ])
+                            ->required(),
+
+                        Select::make('size')
+                            ->label('Size')
+                            ->options([
+                                'small' => 'Small',
+                                'medium' => 'Medium',
+                                'large' => 'Large',
+                                'extra_large' => 'Extra Large',
+                                // Add more sizes as needed
+                            ])
+                            ->required(),
+                    ])
+                    ->columns(2),
+
+                // Fieldset for Description
+                Fieldset::make('Description')
+                    ->schema([
+                        Textarea::make('description')
+                            ->rows(4)
+                            ->columnSpanFull(),
+                    ]),
+
+                // Fieldset for Image Uploads
+                Fieldset::make('Images')
+                    ->schema([
+                        FileUpload::make('main_image')
+                            ->label('Main Image')
+                            ->directory('products/main')
+                            ->image()
+                            ->required()
+                            ->imagePreviewHeight('150'),
+
+                        FileUpload::make('gallery_images')
+                            ->label('Gallery Images')
+                            ->directory('products/gallery')
+                            ->multiple()
+                            ->reorderable()
+                            ->image()
+                            ->imagePreviewHeight('100')
+                            ->maxFiles(6),
+                    ])
+                    ->columns(2),
             ]);
     }
 
