@@ -14,6 +14,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Tables\Columns\ImageColumn;
@@ -48,6 +49,20 @@ class ProductResource extends Resource
                             ->disabled(fn($record) => $record !== null)
                             ->maxLength(20)
                             ->required(),
+
+                        RichEditor::make('description')
+                            ->label('Product Description')
+                            ->placeholder('Enter a detailed description of the product.')
+                            ->required()
+                            ->toolbarButtons([
+                                'bold',
+                                'italic',
+                                'link',
+                                'heading',
+                                'unorderedList',
+                                'orderedList'
+                            ])
+                            ->columnSpanFull(),
                     ])
                     ->columns(2),
 
@@ -66,29 +81,56 @@ class ProductResource extends Resource
                             ->suffix('%')
                             ->label('Offer (%)')
                             ->hint('Leave blank if no discount'),
+
+                        // Add Stock Field here
+                        TextInput::make('stock')
+                            ->label('Stock Quantity')
+                            ->numeric()
+                            ->required()
+                            ->minValue(0)
+                            ->hint('Enter the current stock quantity')
+                            ->prefix('Qty: '),
                     ])
                     ->columns(2),
 
                 // Fieldset for Product Features
                 Fieldset::make('Product Features')
                     ->schema([
-                        Textarea::make('key_features')
+                        RichEditor::make('key_features')
                             ->label('Key Features')
-                            ->rows(5)
                             ->placeholder('Enter product features like "Industry-leading noise cancellation", "30-hour battery life", etc.')
-                            ->hint('Separate each feature with a newline or bullet point'),
+                            ->hint('Use bullet points for each feature.')
+                            ->toolbarButtons([
+                                'blockquote',
+                                'bold',
+                                'bulletList',
+                                'h2',
+                                'h3',
+                                'italic',
+                                'orderedList',
+                                'redo',
+                                'strike',
+                                'underline',
+                                'undo',
+                            ]),
 
-                        Textarea::make('specifications')
+                        RichEditor::make('specifications')
                             ->label('Specifications')
-                            ->rows(5)
                             ->placeholder('Enter specifications like "Lotion Type", "Care Instruction", etc.')
-                            ->hint('Enter each specification in a new line'),
-
-                        Textarea::make('about_item')
-                            ->label('About this Item')
-                            ->rows(5)
-                            ->placeholder('Enter details about the item, such as "Lotion Type", "Use", etc.')
-                            ->hint('Provide detailed information about this item'),
+                            ->hint('Provide a detailed list of specifications.')
+                            ->toolbarButtons([
+                                'blockquote',
+                                'bold',
+                                'bulletList',
+                                'h2',
+                                'h3',
+                                'italic',
+                                'orderedList',
+                                'redo',
+                                'strike',
+                                'underline',
+                                'undo',
+                            ]),
                     ])
                     ->columns(1),
 
@@ -103,9 +145,7 @@ class ProductResource extends Resource
                                 'green' => 'Green',
                                 'black' => 'Black',
                                 'white' => 'White',
-                                // Add more colors as needed
-                            ])
-                            ->required(),
+                            ]),
 
                         Select::make('size')
                             ->label('Size')
@@ -114,19 +154,9 @@ class ProductResource extends Resource
                                 'medium' => 'Medium',
                                 'large' => 'Large',
                                 'extra_large' => 'Extra Large',
-                                // Add more sizes as needed
-                            ])
-                            ->required(),
+                            ]),
                     ])
                     ->columns(2),
-
-                // Fieldset for Description
-                Fieldset::make('Description')
-                    ->schema([
-                        Textarea::make('description')
-                            ->rows(4)
-                            ->columnSpanFull(),
-                    ]),
 
                 // Fieldset for Image Uploads
                 Fieldset::make('Images')
@@ -151,6 +181,8 @@ class ProductResource extends Resource
             ]);
     }
 
+
+
     public static function table(Table $table): Table
     {
         return $table
@@ -159,7 +191,10 @@ class ProductResource extends Resource
                     ->label('Image')
                     ->circular()
                     ->width(50)
-                    ->height(50),
+                    ->height(50)
+                    ->getStateUsing(function ($record) {
+                        return asset('storage/' . $record->main_image);
+                    }),
 
                 TextColumn::make('name')->searchable()->sortable(),
 
@@ -182,7 +217,7 @@ class ProductResource extends Resource
                     ->dateTime('M d, Y'),
             ])
             ->filters([
-                //
+                // Your filters can go here...
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
