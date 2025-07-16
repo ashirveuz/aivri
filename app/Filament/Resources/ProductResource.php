@@ -20,7 +20,7 @@ use Filament\Forms\Components\Textarea;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Support\Str;
-use Filament\Forms\Components\Select; // <-- Add this import
+use Filament\Forms\Components\Select;
 
 
 class ProductResource extends Resource

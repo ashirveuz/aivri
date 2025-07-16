@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Traits\DeleteFile;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
 class Product extends Model
 {
-    use HasFactory;
+    use HasFactory, DeleteFile;
 
     protected $fillable = [
         'name',
@@ -35,7 +36,7 @@ class Product extends Model
     protected static function booted()
     {
         static::creating(function ($product) {
-            // Set default 'status' to 1 (active) if not explicitly set
+
             if ($product->status === null) {
                 $product->status = 1;
             }
@@ -43,6 +44,41 @@ class Product extends Model
             // If the product doesn't already have a product_code, generate a new one
             if (empty($product->product_code)) {
                 $product->product_code = strtoupper(Str::random(10)); // Generates a unique 10-character string
+            }
+        });
+
+        static::deleted(function ($product) {
+
+            // Delete the main image if it exists
+            if ($product->main_image) {
+                $product->deleteFile($product->main_image);
+            }
+
+            // Delete gallery images if they exist
+            if ($product->gallery_images) {
+                foreach ($product->gallery_images as $image) {
+                    $product->deleteFile($image);
+                }
+            }
+        });
+
+        // Hook to delete images on product update
+        static::updating(function ($product) {
+            // Check if main image is being updated and delete the old one
+            if ($product->isDirty('main_image') && $product->getOriginal('main_image')) {
+                $product->deleteFile($product->getOriginal('main_image'));
+            }
+
+            // Check if any gallery image is being updated
+            if ($product->isDirty('gallery_images')) {
+                $oldImages = $product->getOriginal('gallery_images', []);
+                $newImages = $product->gallery_images ?? [];
+
+                // Compare old and new gallery images to find the ones that have been removed
+                $removedImages = array_diff($oldImages, $newImages);
+                foreach ($removedImages as $removedImage) {
+                    $product->deleteFile($removedImage);
+                }
             }
         });
     }
