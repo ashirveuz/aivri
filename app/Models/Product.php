@@ -32,7 +32,6 @@ class Product extends Model
         'status' => 'boolean',
     ];
 
-    // Automatically set status to 1 (active) when creating a new product
     protected static function booted()
     {
         static::creating(function ($product) {
@@ -43,7 +42,7 @@ class Product extends Model
 
             // If the product doesn't already have a product_code, generate a new one
             if (empty($product->product_code)) {
-                $product->product_code = strtoupper(Str::random(10)); // Generates a unique 10-character string
+                $product->product_code = strtoupper(Str::random(10));
             }
         });
 
@@ -62,7 +61,6 @@ class Product extends Model
             }
         });
 
-        // Hook to delete images on product update
         static::updating(function ($product) {
             // Check if main image is being updated and delete the old one
             if ($product->isDirty('main_image') && $product->getOriginal('main_image')) {

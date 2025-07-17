@@ -3,34 +3,28 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ProductResource\Pages;
-use App\Filament\Resources\ProductResource\RelationManagers;
 use App\Models\Product;
-use Filament\Forms;
 use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Textarea;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
-use Illuminate\Support\Str;
-use Filament\Forms\Components\Select;
+use Filament\Tables\Columns\ToggleColumn;
+use Filament\Tables\Actions\ActionGroup;
+use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Actions\ViewAction;
 
 
 class ProductResource extends Resource
 {
     protected static ?string $model = Product::class;
-
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    // protected static ?string $navigationIcon = 'heroicon-o-shopping-cart';
-    protected static ?string $navigationLabel = 'Products';
-    protected static ?string $pluralModelLabel = 'Products';
+    protected static ?string $navigationIcon = 'heroicon-o-shopping-cart';
 
     public static function form(Form $form): Form
     {
@@ -72,7 +66,7 @@ class ProductResource extends Resource
                         TextInput::make('price')
                             ->numeric()
                             ->required()
-                            ->prefix('$'),
+                            ->prefix('₹'),
 
                         TextInput::make('offer_percentage')
                             ->numeric()
@@ -82,7 +76,6 @@ class ProductResource extends Resource
                             ->label('Offer (%)')
                             ->hint('Leave blank if no discount'),
 
-                        // Add Stock Field here
                         TextInput::make('stock')
                             ->label('Stock Quantity')
                             ->numeric()
@@ -134,30 +127,6 @@ class ProductResource extends Resource
                     ])
                     ->columns(1),
 
-                // Fieldset for Color and Size
-                Fieldset::make('Color & Size')
-                    ->schema([
-                        Select::make('color')
-                            ->label('Color')
-                            ->options([
-                                'red' => 'Red',
-                                'blue' => 'Blue',
-                                'green' => 'Green',
-                                'black' => 'Black',
-                                'white' => 'White',
-                            ]),
-
-                        Select::make('size')
-                            ->label('Size')
-                            ->options([
-                                'small' => 'Small',
-                                'medium' => 'Medium',
-                                'large' => 'Large',
-                                'extra_large' => 'Extra Large',
-                            ]),
-                    ])
-                    ->columns(2),
-
                 // Fieldset for Image Uploads
                 Fieldset::make('Images')
                     ->schema([
@@ -188,7 +157,7 @@ class ProductResource extends Resource
         return $table
             ->columns([
                 ImageColumn::make('main_image')
-                    ->label('Image')
+                    ->label('')
                     ->circular()
                     ->width(50)
                     ->height(50)
@@ -196,31 +165,53 @@ class ProductResource extends Resource
                         return asset('storage/' . $record->main_image);
                     }),
 
-                TextColumn::make('name')->searchable()->sortable(),
+                TextColumn::make('name')
+                    ->label('Product Name')
+                    ->searchable(),
 
                 TextColumn::make('code')
-                    ->label('Code')
-                    ->sortable()
+                    ->label('Product Code')
+                    ->badge()
                     ->searchable(),
 
                 TextColumn::make('price')
-                    ->money('usd', true)
-                    ->sortable(),
+                    ->money('inr', true)
+                    ->sortable()
+                    ->searchable(),
 
                 TextColumn::make('offer_percentage')
                     ->label('Offer')
                     ->formatStateUsing(fn($state) => $state ? "{$state}%" : '-')
+                    ->searchable()
                     ->sortable(),
 
-                TextColumn::make('created_at')
-                    ->label('Created')
-                    ->dateTime('M d, Y'),
+                TextColumn::make('stock')
+                    ->label('Available Stock')
+                    ->searchable()
+                    ->badge()
+                    ->color(fn($state) => match (true) {
+                        $state == 0 => 'danger',
+                        $state < 5 => 'warning',
+                        default => 'success',
+                    })
+                    ->sortable(),
+
+                ToggleColumn::make('status')
+                    ->label('Active')
+                    ->sortable()
+                    ->onColor('success')
+                    ->offColor('danger')
+                    ->toggleable(),
             ])
             ->filters([
                 // Your filters can go here...
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                ActionGroup::make([
+                    ViewAction::make(),
+                    EditAction::make(),
+                    DeleteAction::make(),
+                ])->tooltip('Actions'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
