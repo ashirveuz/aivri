@@ -18,14 +18,16 @@ return new class extends Migration
             $table->string('product_code', 20)->unique();
             $table->text('description');
             $table->decimal('price', 10, 2);
+            $table->string('currency', 3)->default('INR');
+            $table->string('currency_symbol', 5)->default('₹');
             $table->unsignedInteger('offer_percentage')->nullable()->default(0);
             $table->unsignedInteger('stock')->default(0);
             $table->text('key_features')->nullable();
             $table->text('specifications')->nullable();
             $table->string('color', 50)->nullable();
             $table->string('size', 50)->nullable();
-            $table->string('main_image')->nullable();
-            $table->json('gallery_images')->nullable();
+            $table->string('featured_image')->nullable();
+            $table->json('additional_images')->nullable();
             $table->boolean('status')->default(1);
             $table->timestamps();
         });

@@ -9,17 +9,18 @@
                     <div class="col-md-6 mb-4">
                         <div class="first-pr-dtls-slide">
                             <div class="pr-dtls-slide">
-                                <img src="assets/img/most-freq-product1.png" alt="Product"
-                                    class="img-fluid rounded mb-3 product-image" id="mainImage">
+                                <img src="{{ file_exists(public_path('storage/' . $product->featured_image)) ? asset('storage/' . $product->featured_image) : asset('assets/img/no_image.jpg') }}"
+                                    alt="Product" class="img-fluid rounded mb-3 product-image" id="mainImage">
                                 <div class="pr-dtl-small-img">
-                                    <img src="assets/img/most-freq-product1.png" alt="Thumbnail 1"
-                                        class="thumbnail rounded active" onclick="changeImage(event, this.src)">
-                                    <img src="assets/img/most-freq-product2.png" class="thumbnail rounded"
+                                    <img src="{{ file_exists(public_path('storage/' . $product->featured_image)) ? asset('storage/' . $product->featured_image) : asset('assets/img/no_image.jpg') }}"
+                                        alt="Thumbnail 1" class="thumbnail rounded active"
                                         onclick="changeImage(event, this.src)">
-                                    <img src="assets/img/most-freq-product3.png" alt="Thumbnail 3" class="thumbnail rounded"
-                                        onclick="changeImage(event, this.src)">
-                                    <img src="assets/img/most-freq-product4.png" alt="Thumbnail 4" class="thumbnail rounded"
-                                        onclick="changeImage(event, this.src)">
+
+                                    @foreach ($product->additional_images as $index => $image)
+                                        <img src="{{ file_exists(public_path('storage/' . $image)) ? asset('storage/' . $image) : asset('assets/img/no_image.jpg') }}"
+                                            class="thumbnail rounded" alt="Thumbnail {{ $index + 1 }}"
+                                            onclick="changeImage(event, this.src)">
+                                    @endforeach
                                 </div>
                             </div>
                             <div class="main-btn-out">
@@ -53,13 +54,18 @@
                     <div class="col-md-6 right-pr-dtls-out">
                         <div class="right-pr-dtls">
 
-                            <h2>Re—touch Soft Focus Setting Powder </h2>
+                            <h2>{{ $product->name }}</h2>
 
-                            <p class="text-muted mb-4">PKU: NH1022KY6</p>
+                            <p class="text-muted mb-4">PKU: {{ $product->code }}</p>
 
                             <div class="pr-dtls-tot-amnt">
-                                <span class="dtls-amt">$349.99</span>
-                                <span class="text-muted dtls-amt-muted"><s>$399.99</s></span>
+                                @if ($product->offer_percentage && $product->offer_percentage > 0)
+                                    <span class="dtls-amt">{{ $product->currency_symbol . $product->current_price }}</span>
+                                    <span
+                                        class="text-muted dtls-amt-muted"><s>{{ $product->currency_symbol . $product->price }}</s></span>
+                                @else
+                                    <span class="dtls-amt">{{ $product->currency_symbol . $product->price }}</span>
+                                @endif
                             </div>
 
                             <div class="pr-dtls-star mb-3">
@@ -72,28 +78,20 @@
                             </div>
 
                             <p class="pr-dtls-para">
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                                been the
-                                industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
-                                of type and scrambled it to make a type specimen book.
+                                {!! $product->description !!}
                             </p>
 
                             <div class="filter-group filter-group-color">
                                 <h6>Colors</h6>
                                 <div class="d-flex gap-2">
-                                    <div class="color-option selected" style="background: #000000;"></div>
-                                    <div class="color-option" style="background: #dc2626;"></div>
-                                    <div class="color-option" style="background: #2563eb;"></div>
-                                    <div class="color-option" style="background: #16a34a;"></div>
+                                    <div class="color-option selected" style="background: {{ $product->color }}"></div>
                                 </div>
                             </div>
 
                             <div class="filter-group filter-group-size">
                                 <h6>Size</h6>
                                 <ul>
-                                    <li>100ml</li>
-                                    <li>200ml</li>
-                                    <li>500ml</li>
+                                    <li> {{ $product->size . 'ml' }} </li>
                                 </ul>
                             </div>
 
@@ -114,24 +112,14 @@
                             <div class="pr-dtls-features">
                                 <h5>Key Features:</h5>
                                 <ul>
-                                    <li>Industry-leading noise cancellation</li>
-                                    <li>30-hour battery life</li>
-                                    <li>Touch sensor controls</li>
-                                    <li>Speak-to-chat technology</li>
+                                    {!! $product->key_features !!}
                                 </ul>
                             </div>
 
                             <div class="pr-dtls-product-descptn">
                                 <h5>Specifications:</h5>
                                 <ul>
-                                    <li>Lotion Type</li>
-                                    <li>Natural, Natural, Natural</li>
-                                    <li>Care Instruction</li>
-                                    <li>Simple Use</li>
-                                    <li>Origin </li>
-                                    <li>Imported</li>
-                                    <li>Use </li>
-                                    <li>Use Daily</li>
+                                    {!! $product->specifications !!}
                                 </ul>
                             </div>
 
@@ -149,33 +137,6 @@
 
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <div class="pr-dtls-desc">
-                <div class="pr-dtls-desc-para">
-                    <h5>Product Description: </h5>
-                    <p>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-                        has been the industry's standard dummy text ever since the 1500s, when an unknown
-                        printer took a galley of type and scrambled it to make a type specimen book. It has
-                        survived not only five centuries, but also the leap into electronic typesetting,
-                        remaining essentially unchanged. It was popularised in the 1960s with the release of
-                        Letraset sheets containing Lorem Ipsum passages.
-                    </p>
-                </div>
-                <div class="pr-dtls-desc-dtls">
-                    <h5>About this Item: </h5>
-                    <ul>
-                        <li>Lotion Type</li>
-                        <li>Natural, Natural, Natural</li>
-                        <li>Care Instruction</li>
-                        <li>Simple Use</li>
-                        <li>Origin </li>
-                        <li>Imported</li>
-                        <li>Use </li>
-                        <li>Use Daily</li>
-                    </ul>
                 </div>
             </div>
 
@@ -290,10 +251,10 @@
                                                 <i class="fa-solid fa-star rating-star" data-rating="4"></i>
                                                 <i class="fa-solid fa-star rating-star" data-rating="5"></i>
                                                 <!-- <i class="bi bi-star rating-star" data-rating="1"></i>
-                                          <i class="bi bi-star rating-star" data-rating="2"></i>
-                                          <i class="bi bi-star rating-star" data-rating="3"></i>
-                                          <i class="bi bi-star rating-star" data-rating="4"></i>
-                                          <i class="bi bi-star rating-star" data-rating="5"></i> -->
+                                                      <i class="bi bi-star rating-star" data-rating="2"></i>
+                                                      <i class="bi bi-star rating-star" data-rating="3"></i>
+                                                      <i class="bi bi-star rating-star" data-rating="4"></i>
+                                                      <i class="bi bi-star rating-star" data-rating="5"></i> -->
                                             </div>
                                             <input type="hidden" id="rating" name="rating" value="0">
                                         </div>
@@ -307,9 +268,9 @@
                                     </div>
                                 </div>
                                 <!-- <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <button type="button" class="btn main-btn py-3 mt-2">Submit Review</button>
-                                  </div> -->
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <button type="button" class="btn main-btn py-3 mt-2">Submit Review</button>
+                                              </div> -->
                             </div>
                         </div>
                     </div>

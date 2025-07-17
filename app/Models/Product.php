@@ -17,18 +17,21 @@ class Product extends Model
         'product_code',
         'description',
         'price',
+        'currency',
+        'currency_symbol',
         'offer_percentage',
         'stock',
         'key_features',
         'specifications',
         'color',
         'size',
-        'main_image',
-        'gallery_images',
+        'featured_image',
+        'additional_images',
+        'status',
     ];
 
     protected $casts = [
-        'gallery_images' => 'array',
+        'additional_images' => 'array',
         'status' => 'boolean',
     ];
 
@@ -49,13 +52,13 @@ class Product extends Model
         static::deleted(function ($product) {
 
             // Delete the main image if it exists
-            if ($product->main_image) {
-                $product->deleteFile($product->main_image);
+            if ($product->featured_image) {
+                $product->deleteFile($product->featured_image);
             }
 
             // Delete gallery images if they exist
-            if ($product->gallery_images) {
-                foreach ($product->gallery_images as $image) {
+            if ($product->additional_images) {
+                foreach ($product->additional_images as $image) {
                     $product->deleteFile($image);
                 }
             }
@@ -63,14 +66,14 @@ class Product extends Model
 
         static::updating(function ($product) {
             // Check if main image is being updated and delete the old one
-            if ($product->isDirty('main_image') && $product->getOriginal('main_image')) {
-                $product->deleteFile($product->getOriginal('main_image'));
+            if ($product->isDirty('featured_image') && $product->getOriginal('featured_image')) {
+                $product->deleteFile($product->getOriginal('featured_image'));
             }
 
             // Check if any gallery image is being updated
-            if ($product->isDirty('gallery_images')) {
-                $oldImages = $product->getOriginal('gallery_images', []);
-                $newImages = $product->gallery_images ?? [];
+            if ($product->isDirty('additional_images')) {
+                $oldImages = $product->getOriginal('additional_images', []);
+                $newImages = $product->additional_images ?? [];
 
                 // Compare old and new gallery images to find the ones that have been removed
                 $removedImages = array_diff($oldImages, $newImages);
@@ -88,7 +91,7 @@ class Product extends Model
      */
     public function getMainImageUrlAttribute()
     {
-        return asset('storage/products/main/' . $this->main_image);
+        return asset('storage/products/main/' . $this->featured_image);
     }
 
     /**
@@ -100,6 +103,14 @@ class Product extends Model
     {
         return array_map(function ($image) {
             return asset('storage/products/gallery/' . $image);
-        }, $this->gallery_images);
+        }, $this->additional_images);
+    }
+
+    public function getCurrentPriceAttribute()
+    {
+        if ($this->offer_percentage && $this->offer_percentage > 0 && $this->offer_percentage < 100) {
+            return $this->price * (1 - $this->offer_percentage / 100);
+        }
+        return $this->price;
     }
 }

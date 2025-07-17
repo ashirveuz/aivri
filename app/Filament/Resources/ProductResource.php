@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ProductResource\Pages;
 use App\Models\Product;
+use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -86,6 +87,20 @@ class ProductResource extends Resource
                     ])
                     ->columns(2),
 
+                // Fieldset for colour and size
+                Fieldset::make('Colour & Size')
+                    ->schema([
+                        ColorPicker::make('color')
+                            ->label('Product Color')
+                            ->regex('/^#([a-f0-9]{6}|[a-f0-9]{3})\b$/'),
+
+                        TextInput::make('size')
+                            ->numeric()
+                            ->prefix('ml'),
+
+                    ])
+                    ->columns(2),
+
                 // Fieldset for Product Features
                 Fieldset::make('Product Features')
                     ->schema([
@@ -130,14 +145,14 @@ class ProductResource extends Resource
                 // Fieldset for Image Uploads
                 Fieldset::make('Images')
                     ->schema([
-                        FileUpload::make('main_image')
+                        FileUpload::make('featured_image')
                             ->label('Main Image')
                             ->directory('products/main')
                             ->image()
                             ->required()
                             ->imagePreviewHeight('150'),
 
-                        FileUpload::make('gallery_images')
+                        FileUpload::make('additional_images')
                             ->label('Gallery Images')
                             ->directory('products/gallery')
                             ->multiple()
@@ -156,13 +171,13 @@ class ProductResource extends Resource
     {
         return $table
             ->columns([
-                ImageColumn::make('main_image')
+                ImageColumn::make('featured_image')
                     ->label('')
                     ->circular()
                     ->width(50)
                     ->height(50)
                     ->getStateUsing(function ($record) {
-                        return asset('storage/' . $record->main_image);
+                        return asset('storage/' . $record->featured_image);
                     }),
 
                 TextColumn::make('name')

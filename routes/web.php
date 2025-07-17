@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\WishListController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 Route::redirect('/', '/home');
@@ -12,4 +13,8 @@ Route::prefix('home')->controller(HomeController::class)->group(function () {
 
 Route::prefix('wish-list')->controller(WishListController::class)->group(function () {
     Route::get('/', 'index')->name('website.wish-list');
+});
+
+Route::prefix('product')->controller(ProductController::class)->group(function () {
+    Route::get('/', 'index')->name('website.product');
 });
