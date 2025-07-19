@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\HomeResource\Pages;
 use App\Models\Home;
+use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Form;
@@ -33,53 +34,67 @@ class HomeResource extends Resource
                             ->iconPosition(IconPosition::After)
                             ->schema([
 
-                                TextInput::make('banner_title')
-                                    ->label('Banner Title')
-                                    ->required(),
+                                Fieldset::make('Banner')
+                                    ->schema([
+                                        TextInput::make('banner_title')
+                                            ->label('Title')
+                                            ->required(),
 
-                                Textarea::make('banner_description')
-                                    ->label('Banner Description'),
+                                        Textarea::make('banner_description')
+                                            ->label('Description'),
+                                    ])->columns(2),
 
-                                FileUpload::make('banner_images')
-                                    ->label('Upload Banner Images')
-                                    ->directory('home')
-                                    ->multiple()
-                                    ->maxFiles(6)
-                                    ->image()
-                                    ->disk('public')
-                                    ->visibility('public')
-                                    ->required()
-                                    ->helperText('Upload up to 6 images for the banner.'),
+                                Fieldset::make('Images')
+                                    ->schema([
+                                        FileUpload::make('banner_images')
+                                            ->label('Upload Banner Images')
+                                            ->directory('home')
+                                            ->multiple()
+                                            ->maxFiles(6)
+                                            ->image()
+                                            ->disk('public')
+                                            ->visibility('public')
+                                            ->required()
+                                            ->helperText('Upload up to 6 images for the banner.')
+                                            ->imagePreviewHeight('80'),
 
-                                TextInput::make('image_alt')
-                                    ->label('Image Alt Text'),
+                                        TextInput::make('image_alt')
+                                            ->label('Image Alt Text'),
 
-                                // //Repeter code: inside schema add repeting input fields.
-                                // Repeater::make('banner_images')
-                                //     ->label('Banner Images')
-                                //     ->schema([
-                                //     ])
-                                //     ->columns(1)
-                                //     ->minItems(6) 
-                                //     ->maxItems(6)
-                                //     ->helperText('Add alt text for each image uploaded above.'),
+                                        // //Repeter code: inside schema add repeting input fields.
+                                        // Repeater::make('banner_images')
+                                        //     ->label('Banner Images')
+                                        //     ->schema([
+                                        //     ])
+                                        //     ->columns(1)
+                                        //     ->minItems(6) 
+                                        //     ->maxItems(6)
+                                        //     ->helperText('Add alt text for each image uploaded above.'),
+                                    ])->columns(2),
                             ]),
 
                         Tabs\Tab::make('SEO')
                             ->icon('heroicon-m-magnifying-glass')
                             ->iconPosition(IconPosition::After)
                             ->schema([
-                                TextInput::make('meta_title')
-                                    ->label('Meta Title'),
 
-                                TextInput::make('meta_keywords')
-                                    ->label('Meta Keywords'),
+                                Fieldset::make('SEO')
+                                    ->schema([
+                                        TextInput::make('meta_title')
+                                            ->label('Meta Title'),
 
-                                Textarea::make('meta_description')
-                                    ->label('Meta Description'),
+                                        TextInput::make('meta_keywords')
+                                            ->label('Meta Keywords'),
+
+                                        Textarea::make('meta_description')
+                                            ->label('Meta Description'),
+                                    ])->columns(2),
+
                             ]),
                     ])
-            ]);
+                    ->contained(false)
+                    ->columnSpanFull()
+            ])->columns(1);
     }
 
     public static function table(Table $table): Table
