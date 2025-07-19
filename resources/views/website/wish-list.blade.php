@@ -128,28 +128,4 @@
 
         </div>
     </section>
-
-
-    <section class="custom-full-pr">
-        <div class="width-container h-100">
-            <div class="custom-full-pr-cont">
-                <button class="btn">CUSTOMER LOVED, BEST SELLING</button>
-                <h2>Signature Makeup Products</h2>
-                <p>Explore our soft, vegan, high quality brushes that offer precision and control.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="home-pr-search">
-        <div class="width-container">
-            <div class="home-pr-search-innr">
-                <h3>Receive 15% off your first order</h3>
-                <p>No spam, just the good stuff. Pinky promise.</p>
-                <form>
-                    <input class="form-control" type="search" placeholder="Email Address" aria-label="Search">
-                    <button class="btn" type="submit">Subscribe </button>
-                </form>
-            </div>
-        </div>
-    </section>
 @endsection

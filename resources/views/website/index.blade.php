@@ -4,35 +4,58 @@
         <div class="banner_slider">
 
             <div id="carouselExampleIndicators" class="carousel slide carousel-outr" data-bs-ride="carousel">
-                @foreach ($home->banner_images as $kry => $image)
-    
-                    <div class="carousel-indicators">
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
-                            aria-current="true" aria-label="Slide 1"></button>
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-                            aria-label="Slide 2"></button>
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-                            aria-label="Slide 3"></button>
-                    </div>
-
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="{{ file_exists(public_path('storage/' . $image)) ? asset('storage/' . $image) : asset('assets/img/no_image.jpg') }}"
-                                class="d-block w-100" alt="{{ $home->image_alt }}">
-                            <div class="carousel-caption" data-aos="fade-down" data-aos-duration="3000">
-                                <h5>{{ $home->banner_title }}</h5>
-                                <p>{{ $home->banner_description }}</p>
-                                <div class="main-btn-out">
-                                    <button type="button" class="btn main-btn">Shop Now <i
-                                            class="fa-solid fa-arrow-right-long"></i> </button>
-                                    <button type="button" class="btn second-btn">How We Work <i
-                                            class="fa-regular fa-circle-play"></i></button>
-                                </div>
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+                        aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                        aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                        aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="assets/img/banner-img01.png" class="d-block w-100" alt="aivri">
+                        <div class="carousel-caption" data-aos="fade-down" data-aos-duration="3000">
+                            <h5>Every new beginning deserves the touch of purity </h5>
+                            <p>What’s more, we do it right! A full administration printing background.
+                                Print shirts for yourself or your online business</p>
+                            <div class="main-btn-out">
+                                <a href="product-listing.html" class="main-btn">Shop Now <i
+                                        class="fa-solid fa-arrow-right-long"></i></a>
+                                <a href="about.html" class="second-btn">How We Work <i
+                                        class="fa-regular fa-circle-play"></i></a>
                             </div>
                         </div>
                     </div>
-                @endforeach
-
+                    <div class="carousel-item">
+                        <img src="assets/img/banner-img01.png" class="d-block w-100" alt="aivri">
+                        <div class="carousel-caption">
+                            <h5>Every new beginning deserves the touch of purity </h5>
+                            <p>What’s more, we do it right! A full administration printing background.
+                                Print shirts for yourself or your online business</p>
+                            <div class="main-btn-out">
+                                <a href="product-listing.html" class="main-btn">Shop Now <i
+                                        class="fa-solid fa-arrow-right-long"></i></a>
+                                <a href="about.html" class="second-btn">How We Work <i
+                                        class="fa-regular fa-circle-play"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="assets/img/banner-img01.png" class="d-block w-100" alt="aivri">
+                        <div class="carousel-caption">
+                            <h5>Every new beginning deserves the touch of purity </h5>
+                            <p>What’s more, we do it right! A full administration printing background.
+                                Print shirts for yourself or your online business</p>
+                            <div class="main-btn-out">
+                                <a href="product-listing.html" class="main-btn">Shop Now <i
+                                        class="fa-solid fa-arrow-right-long"></i></a>
+                                <a href="about.html" class="second-btn">How We Work <i
+                                        class="fa-regular fa-circle-play"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
                     data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -49,10 +72,6 @@
     </section>
 
 
-    <section class="scroll-bar-out">
-        <div class="r-scroll">
-        </div>
-    </section>
     <!-- top-products-start -->
     <section class="top-products">
         <div class="width-container">
@@ -196,10 +215,9 @@
                                 </h6>
                             </div>
                             <div class="right-item-content">
-                                <button type="button" class="btn"
-                                    onclick="window.location.href='product-listing.html'">
+                                <a href="product-listing.html">
                                     <i class="fa-solid fa-arrow-right-long"></i>
-                                </button>
+                                </a>
                             </div>
                         </div>
                         <div class="top-categories-item-bg">
@@ -242,10 +260,9 @@
                                 </h6>
                             </div>
                             <div class="right-item-content">
-                                <button type="button" class="btn"
-                                    onclick="window.location.href='product-listing.html'">
+                                <a href="product-listing.html">
                                     <i class="fa-solid fa-arrow-right-long"></i>
-                                </button>
+                                </a>
                             </div>
                         </div>
                         <div class="top-categories-item-bg">
@@ -288,10 +305,9 @@
                                 </h6>
                             </div>
                             <div class="right-item-content">
-                                <button type="button" class="btn"
-                                    onclick="window.location.href='product-listing.html'">
+                                <a href="product-listing.html">
                                     <i class="fa-solid fa-arrow-right-long"></i>
-                                </button>
+                                </a>
                             </div>
                         </div>
                         <div class="top-categories-item-bg">
@@ -334,10 +350,9 @@
                                 </h6>
                             </div>
                             <div class="right-item-content">
-                                <button type="button" class="btn"
-                                    onclick="window.location.href='product-listing.html'">
+                                <a href="product-listing.html">
                                     <i class="fa-solid fa-arrow-right-long"></i>
-                                </button>
+                                </a>
                             </div>
                         </div>
                         <div class="top-categories-item-bg">
@@ -774,7 +789,7 @@
 
                             <div class="most-freq-item-cont">
                                 <div class="left-most-freq-item-cont">
-                                    <h6>Re—touch Soft Focus Setting Powder</h6>
+                                    <h6><a href="product-listing.html">Re—touch Soft Focus Setting Powder </a></h6>
                                     <div class="most-freq-dtls">
                                         <span class="value">4.7</span><span class="star"><i
                                                 class="fa-solid fa-star"></i></span><span class="value-count">| 184
@@ -819,7 +834,7 @@
 
                             <div class="most-freq-item-cont">
                                 <div class="left-most-freq-item-cont">
-                                    <h6>Re—touch Soft Focus Setting Powder</h6>
+                                    <h6><a href="product-listing.html">Re—touch Soft Focus Setting Powder </a></h6>
                                     <div class="most-freq-dtls">
                                         <span class="value">4.7</span><span class="star"><i
                                                 class="fa-solid fa-star"></i></span><span class="value-count">| 184
@@ -863,7 +878,7 @@
                             </div>
                             <div class="most-freq-item-cont">
                                 <div class="left-most-freq-item-cont">
-                                    <h6>Re—touch Soft Focus Setting Powder</h6>
+                                    <h6><a href="product-listing.html">Re—touch Soft Focus Setting Powder </a></h6>
                                     <div class="most-freq-dtls">
                                         <span class="value">4.7</span><span class="star"><i
                                                 class="fa-solid fa-star"></i></span><span class="value-count">| 184
@@ -907,7 +922,7 @@
                             </div>
                             <div class="most-freq-item-cont">
                                 <div class="left-most-freq-item-cont">
-                                    <h6>Re—touch Soft Focus Setting Powder</h6>
+                                    <h6><a href="product-listing.html">Re—touch Soft Focus Setting Powder </a></h6>
                                     <div class="most-freq-dtls">
                                         <span class="value">4.7</span><span class="star"><i
                                                 class="fa-solid fa-star"></i></span><span class="value-count">| 184
@@ -992,7 +1007,9 @@
                                 comfortable, intuitive to apply,
                                 and long-lasting, so you won't think twice about using. Plus, they're skin-friendly!
                             </p>
-                            <button class="btn main-btn">Learn More <i class="fa-solid fa-arrow-right-long"></i></button>
+                            <a href="about.html" class="btn main-btn">Learn More
+                                <!-- <i class="fa-solid fa-arrow-right-long"></i> -->
+                            </a>
                         </div>
                     </div>
                     <div class="col-md-6 left-mkp-products-item">
@@ -1096,29 +1113,6 @@
                     </div>
 
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="custom-full-pr">
-        <div class="width-container h-100">
-            <div class="custom-full-pr-cont">
-                <button class="btn">CUSTOMER LOVED, BEST SELLING</button>
-                <h2>Signature Makeup Products</h2>
-                <p>Explore our soft, vegan, high quality brushes that offer precision and control.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="home-pr-search">
-        <div class="width-container">
-            <div class="home-pr-search-innr">
-                <h3>Receive 15% off your first order</h3>
-                <p>No spam, just the good stuff. Pinky promise.</p>
-                <form>
-                    <input class="form-control" type="search" placeholder="Email Address" aria-label="Search">
-                    <button class="btn" type="submit">Subscribe </button>
-                </form>
             </div>
         </div>
     </section>
