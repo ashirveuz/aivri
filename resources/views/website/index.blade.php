@@ -4,58 +4,35 @@
         <div class="banner_slider">
 
             <div id="carouselExampleIndicators" class="carousel slide carousel-outr" data-bs-ride="carousel">
-                <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
-                        aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-                        aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-                        aria-label="Slide 3"></button>
-                </div>
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="assets/img/banner-img01.png" class="d-block w-100" alt="aivri">
-                        <div class="carousel-caption" data-aos="fade-down" data-aos-duration="3000">
-                            <h5>Every new beginning deserves the touch of purity </h5>
-                            <p>What’s more, we do it right! A full administration printing background.
-                                Print shirts for yourself or your online business</p>
-                            <div class="main-btn-out">
-                                <button type="button" class="btn main-btn">Shop Now <i
-                                        class="fa-solid fa-arrow-right-long"></i> </button>
-                                <button type="button" class="btn second-btn">How We Work <i
-                                        class="fa-regular fa-circle-play"></i></button>
+                @foreach ($home->banner_images as $kry => $image)
+    
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+                            aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                            aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                            aria-label="Slide 3"></button>
+                    </div>
+
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="{{ file_exists(public_path('storage/' . $image)) ? asset('storage/' . $image) : asset('assets/img/no_image.jpg') }}"
+                                class="d-block w-100" alt="{{ $home->image_alt }}">
+                            <div class="carousel-caption" data-aos="fade-down" data-aos-duration="3000">
+                                <h5>{{ $home->banner_title }}</h5>
+                                <p>{{ $home->banner_description }}</p>
+                                <div class="main-btn-out">
+                                    <button type="button" class="btn main-btn">Shop Now <i
+                                            class="fa-solid fa-arrow-right-long"></i> </button>
+                                    <button type="button" class="btn second-btn">How We Work <i
+                                            class="fa-regular fa-circle-play"></i></button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="carousel-item">
-                        <img src="assets/img/banner-img01.png" class="d-block w-100" alt="aivri">
-                        <div class="carousel-caption">
-                            <h5>Every new beginning deserves the touch of purity </h5>
-                            <p>What’s more, we do it right! A full administration printing background.
-                                Print shirts for yourself or your online business</p>
-                            <div class="main-btn-out">
-                                <button type="button" class="btn main-btn">Shop Now <i
-                                        class="fa-solid fa-arrow-right-long"></i> </button>
-                                <button type="button" class="btn second-btn">How We Work <i
-                                        class="fa-regular fa-circle-play"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img src="assets/img/banner-img01.png" class="d-block w-100" alt="aivri">
-                        <div class="carousel-caption">
-                            <h5>Every new beginning deserves the touch of purity </h5>
-                            <p>What’s more, we do it right! A full administration printing background.
-                                Print shirts for yourself or your online business</p>
-                            <div class="main-btn-out">
-                                <button type="button" class="btn main-btn">Shop Now <i
-                                        class="fa-solid fa-arrow-right-long"></i> </button>
-                                <button type="button" class="btn second-btn">How We Work <i
-                                        class="fa-regular fa-circle-play"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
+
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
                     data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
