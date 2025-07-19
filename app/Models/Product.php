@@ -43,7 +43,6 @@ class Product extends Model
                 $product->status = 1;
             }
 
-            // If the product doesn't already have a product_code, generate a new one
             if (empty($product->product_code)) {
                 $product->product_code = strtoupper(Str::random(10));
             }
@@ -51,12 +50,10 @@ class Product extends Model
 
         static::deleted(function ($product) {
 
-            // Delete the main image if it exists
             if ($product->featured_image) {
                 $product->deleteFile($product->featured_image);
             }
 
-            // Delete gallery images if they exist
             if ($product->additional_images) {
                 foreach ($product->additional_images as $image) {
                     $product->deleteFile($image);
@@ -65,17 +62,14 @@ class Product extends Model
         });
 
         static::updating(function ($product) {
-            // Check if main image is being updated and delete the old one
             if ($product->isDirty('featured_image') && $product->getOriginal('featured_image')) {
                 $product->deleteFile($product->getOriginal('featured_image'));
             }
 
-            // Check if any gallery image is being updated
-            if ($product->isDirty('additional_images')) {
+            if ($product->isDirty('additional_images') && $product->getOriginal('additional_images')) {
                 $oldImages = $product->getOriginal('additional_images', []);
                 $newImages = $product->additional_images ?? [];
 
-                // Compare old and new gallery images to find the ones that have been removed
                 $removedImages = array_diff($oldImages, $newImages);
                 foreach ($removedImages as $removedImage) {
                     $product->deleteFile($removedImage);

@@ -30,6 +30,11 @@ return new class extends Migration
             $table->json('additional_images')->nullable();
             $table->boolean('status')->default(1);
             $table->timestamps();
+
+            $table->index('code');
+            $table->index('price');
+            $table->index('stock');
+            $table->index('status');
         });
     }
 
