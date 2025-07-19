@@ -95,6 +95,53 @@
                                 </ul>
                             </div>
 
+                            <div class="new-size">
+                                <!-- <div class="container my-4"> -->
+                                <div class="row g-3">
+                                    <div class="col-6 col-sm-4 col-md-4 col-lg-3 mt-2 mb-3">
+                                        <div class="price-card active">
+                                            <div><strong>30 g (Pack of 1)</strong></div>
+                                            <div>₹284.00</div>
+                                            <div class="per-100g">(₹946.67 / 100 g)</div>
+                                            <div class="old-price">₹299.00</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-sm-4 col-md-4 col-lg-3 mt-2 mb-3">
+                                        <div class="price-card">
+                                            <div><strong>50 g (Pack of 1)</strong></div>
+                                            <div>₹387.00</div>
+                                            <div class="per-100g">(₹774.00 / 100 g)</div>
+                                            <div class="old-price">₹445.00</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-sm-4 col-md-4 col-lg-3 mt-2 mb-3">
+                                        <div class="price-card">
+                                            <div><strong>50 g (Pack of 2)</strong></div>
+                                            <div>₹712.00</div>
+                                            <div class="per-100g">(₹712.00 / 100 g)</div>
+                                            <div class="old-price">₹890.00</div>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="col-6 col-sm-4 col-md-3">
+                            <div class="price-card">
+                              <div><strong>80 g (Pack of 1)</strong></div>
+                              <div>₹499.00</div>
+                              <div class="per-100g">(₹623.75 / 100 g)</div>
+                              <div class="old-price">₹565.00</div>
+                            </div>
+                          </div>
+                          <div class="col-6 col-sm-4 col-md-3">
+                            <div class="price-card">
+                              <div><strong>80 g (Pack of 2)</strong></div>
+                              <div>₹892.00</div>
+                              <div class="per-100g">(₹557.50 / 100 g)</div>
+                              <div class="old-price">₹1,100.00</div>
+                            </div>
+                          </div> -->
+                                </div>
+                                <!-- </div> -->
+                            </div>
+
                             <div class="pr-dtls-quntity">
                                 <div class="cart-incre">
                                     <label for="quantity" class="form-label">Quantity:</label>
@@ -251,10 +298,10 @@
                                                 <i class="fa-solid fa-star rating-star" data-rating="4"></i>
                                                 <i class="fa-solid fa-star rating-star" data-rating="5"></i>
                                                 <!-- <i class="bi bi-star rating-star" data-rating="1"></i>
-                                                      <i class="bi bi-star rating-star" data-rating="2"></i>
-                                                      <i class="bi bi-star rating-star" data-rating="3"></i>
-                                                      <i class="bi bi-star rating-star" data-rating="4"></i>
-                                                      <i class="bi bi-star rating-star" data-rating="5"></i> -->
+                                                              <i class="bi bi-star rating-star" data-rating="2"></i>
+                                                              <i class="bi bi-star rating-star" data-rating="3"></i>
+                                                              <i class="bi bi-star rating-star" data-rating="4"></i>
+                                                              <i class="bi bi-star rating-star" data-rating="5"></i> -->
                                             </div>
                                             <input type="hidden" id="rating" name="rating" value="0">
                                         </div>
@@ -268,9 +315,9 @@
                                     </div>
                                 </div>
                                 <!-- <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                <button type="button" class="btn main-btn py-3 mt-2">Submit Review</button>
-                                              </div> -->
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        <button type="button" class="btn main-btn py-3 mt-2">Submit Review</button>
+                                                      </div> -->
                             </div>
                         </div>
                     </div>
