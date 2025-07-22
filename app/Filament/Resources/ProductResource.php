@@ -150,7 +150,9 @@ class ProductResource extends Resource
                             ->directory('products/main')
                             ->image()
                             ->required()
-                            ->imagePreviewHeight('150'),
+                            ->imagePreviewHeight('150')
+                            ->optimize('webp')
+                            ->maxSize(5120),
 
                         FileUpload::make('additional_images')
                             ->label('Gallery Images')
@@ -159,7 +161,9 @@ class ProductResource extends Resource
                             ->reorderable()
                             ->image()
                             ->imagePreviewHeight('100')
-                            ->maxFiles(6),
+                            ->maxFiles(6)
+                            ->optimize('webp')
+                            ->maxSize(5120),
                     ])
                     ->columns(2),
             ]);

@@ -1,23 +1,23 @@
 <?php
 
-namespace App\Filament\Resources\HomeResource\Pages;
+namespace App\Filament\Resources\AboutResource\Pages;
 
-use App\Filament\Resources\HomeResource;
-use App\Models\Home;
-use Filament\Resources\Pages\CreateRecord;
+use App\Filament\Resources\AboutResource;
+use App\Models\About;
 use Filament\Actions\Action;
+use Filament\Resources\Pages\CreateRecord;
 
-class CreateHome extends CreateRecord
+class CreateAbout extends CreateRecord
 {
-    protected static string $resource = HomeResource::class;
+    protected static string $resource = AboutResource::class;
     protected static bool $canCreateAnother = false;
 
     public function mount(): void
     {
-        $home = Home::first();
+        $about = About::first();
 
-        if ($home) {
-            redirect()->route('filament.admin.resources.home.edit', ['record' => $home->id]);
+        if ($about) {
+            redirect()->route('filament.admin.resources.about.edit', ['record' => $about->id]);
         }
 
         parent::mount();

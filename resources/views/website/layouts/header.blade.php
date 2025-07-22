@@ -15,7 +15,7 @@
                         <li><a href="#"> Track Order </a></li>
                         <li><a href="#"> Help Centre </a></li>
                         <li><a href="#"> FAQ </a></li>
-                        <li><a href="#"> About Us </a></li>
+                        <li><a href="{{ route('website.about') }}"> About Us </a></li>
                         <li><a href="#"> Contact Us </a></li>
                     </ul>
                 </div>
@@ -52,7 +52,7 @@
                         <div class="menu-overlay">
                             <nav class="menu">
                                 <a href="{{ route('website.home') }}">Home</a>
-                                <a href="#">About</a>
+                                <a href="{{ route('website.about') }}">About</a>
                                 <!-- <div class="menu-dropdown">
                 <a href="#" class="dropdown-toggle">Products <i class="fa-solid fa-chevron-down"></i></a>
                 <div class="dropdown-menu">

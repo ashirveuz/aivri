@@ -3,13 +3,15 @@
     <section class="inner-banner-out">
         <div class="inner_banner">
             <div class="inner_banner-img">
-                <img src="assets/img/inner-banner.webp" class="img-fluid" alt="">
+                <img src="{{ file_exists(public_path('storage/' . $about->banner_image)) ? asset('storage/' . $about->banner_image) : asset('assets/img/no_image.jpg') }}"
+                    class="img-fluid" alt="{{ $about->banner_image_alt }}">
             </div>
             <div class="width-container">
                 <div class="inner-banner-cont">
                     <h2>About Us</h2>
                     <div class="inner-banner-dtls">
-                        <a href="index.html"><span> Home </span></a><span> / </span><span> About Us </span>
+                        <a href="{{ route('website.home') }}"><span> Home </span></a><span> / </span><span>
+                            {{ $about->banner_heading }} </span>
                     </div>
                 </div>
             </div>
@@ -22,20 +24,17 @@
                 <div class="row justify-content-center align-items-center">
                     <div class="col-md-6 right-mkp-products-item">
                         <div class="mkp-products-item">
-                            <h3>About Our
-                                <span> Company </span> look that lasts as long as you do
-                            </h3>
+                            <h3>{{ $about->heading }}</h3>
                             <div class="bottom-border1"></div>
                             <p>
-                                Founded by Ashley Ocampo, a perfectionist cosmetic chemist, our products are easy-to-wear,
-                                comfortable, intuitive to apply,
-                                and long-lasting, so you won't think twice about using. Plus, they're skin-friendly!
+                                {{ $about->description }}
                             </p>
                         </div>
                     </div>
                     <div class="col-md-6 left-mkp-products-item">
                         <div class="mkp-products-item-bg about-page-img">
-                            <img src="assets/img/about.webp" class="img-fluid" alt="aivri">
+                            <img src="{{ file_exists(public_path('storage/' . $about->image)) ? asset('storage/' . $about->image) : asset('assets/img/no_image.jpg') }}"
+                                class="img-fluid" alt="{{ $about->image_alt }}">
                         </div>
                     </div>
                 </div>
@@ -47,18 +46,11 @@
     <section class="common-section vsion-mission">
         <div class="width-container">
             <div class="row justify-content-center g-0">
-
-
-
                 <div class="col-md-4">
                     <div class="mvv-box mission">
                         <img src="assets/img/mission.png" alt="Mission">
                         <h2>OUR MISSION</h2>
-                        <p>Lorem ipsum dolor sit amet consectetur ipsum dolor sit amet consectetur
-                            ipsum dolor sit amet consectetur
-                            ipsum dolor sit amet consectetur
-                            odio non tellus natoque accumsan...</p>
-                        <!-- <img src="assets/img/most-freq-product1.png" alt="Mission"> -->
+                        <p>{!! $about->mission !!}</p>
                     </div>
                 </div>
 
@@ -66,11 +58,7 @@
                     <div class="mvv-box vision">
                         <img src="assets/img/targeting.png" alt="Mission">
                         <h2>OUR VISION</h2>
-                        <p>Lorem ipsum dolor sit amet consectetur ipsum dolor sit amet consectetur
-                            ipsum dolor sit amet consectetur
-                            ipsum dolor sit amet consectetur
-                            odio non tellus natoque accumsan...</p>
-                        <!-- <img src="assets/icons/binoculars.png" alt="Vision"> -->
+                        <p>{!! $about->vision !!}</p>
                     </div>
                 </div>
 
@@ -78,18 +66,9 @@
                     <div class="mvv-box values">
                         <img src="assets/img/customer.png" alt="Mission">
                         <h2>OUR VALUES</h2>
-                        <p>Lorem ipsum dolor sit amet consectetur ipsum dolor sit amet consectetur
-                            ipsum dolor sit amet consectetur
-                            ipsum dolor sit amet consectetur
-                            odio non tellus natoque accumsan...</p>
-                        <!-- <img src="assets/icons/plant-hand.png" alt="Values"> -->
+                        <p>{!! $about->our_values !!}</p>
                     </div>
                 </div>
-
-
-
-
-
             </div>
         </div>
     </section>
@@ -107,19 +86,18 @@
                             <div class="col-md-8 right-ceo-message">
                                 <div class="right-ceo-message-cont">
                                     <p>
-                                        We are the private, public, and not-for-profit sectors,
-                                        We are the private, public, and not-for-profit sectors
-                                        Nearly.
+                                        {{ $about->founder_description }}
                                     </p>
                                     <div class="ceo-message-small">
-                                        <h4>Maha Al-Malik </h4>
-                                        <h6>Honorary President </h6>
+                                        <h4>{{ $about->founder_name }}</h4>
+                                        <h6>{{ $about->founder_professional_title }}</h6>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-4 left-ceo-message">
                                 <div class="left-ceo-message-img">
-                                    <img src="assets/img/ceo.png" class="img-fluid" alt="">
+                                    <img src="{{ file_exists(public_path('storage/' . $about->founder_image)) ? asset('storage/' . $about->founder_image) : asset('assets/img/no_image.jpg') }}"
+                                        class="img-fluid" alt="{{ $about->founder_image_alt }}">
                                 </div>
                             </div>
                         </div>

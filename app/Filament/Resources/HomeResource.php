@@ -22,6 +22,8 @@ class HomeResource extends Resource
 
     protected static ?string $navigationLabel = 'Home';
     protected static ?string $navigationIcon = 'heroicon-o-device-phone-mobile';
+    protected static ?string $pluralModelLabel = 'Home';
+    protected static ?string $slug = 'home';
 
     public static function form(Form $form): Form
     {
@@ -56,7 +58,16 @@ class HomeResource extends Resource
                                             ->visibility('public')
                                             ->required()
                                             ->helperText('Upload up to 6 images for the banner.')
-                                            ->imagePreviewHeight('80'),
+                                            ->imagePreviewHeight('80')
+                                            ->imageEditor()
+                                            ->imageEditorAspectRatios([
+                                                '3.66:1',
+                                            ])
+                                            // ->imageResizeMode('crop')
+                                            // ->imageCropAspectRatio('3.66:1')
+                                            // ->resize(50)
+                                            ->optimize('webp')
+                                            ->maxSize(5120),
 
                                         TextInput::make('image_alt')
                                             ->label('Image Alt Text'),
@@ -126,7 +137,7 @@ class HomeResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\CreateHome::route('/create'),
+            'index' => Pages\CreateHome::route('/'),
             // 'create' => Pages\CreateHome::route('/create'),
             'edit' => Pages\EditHome::route('/{record}/edit'),
         ];
