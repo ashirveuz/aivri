@@ -11,31 +11,28 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('about', function (Blueprint $table) {
+        Schema::create('contact', function (Blueprint $table) {
             $table->id();
-            $table->string('template_name', 20)->default('About Template 1');
+            $table->string('template_name', 20)->default('Contact Template 1');
 
             // Banner Information
             $table->string('banner_heading');
             $table->string('banner_image');
             $table->string('banner_image_alt')->nullable();
 
-            //About us information
-            $table->string('heading');
+            //Address Information  
+            $table->text('address');
+            $table->string('phone');
+            $table->string('email');
+
+            //Discription Paragraph
             $table->text('description');
-            $table->string('image');
-            $table->string('image_alt')->nullable();
 
-            //Mission information
-            $table->text('mission');
-            $table->text('vision');
-            $table->text('our_values');
-
-            //Founder information
-            $table->string('founder_name');
-            $table->string('founder_professional_title');
-            $table->text('founder_description');
-            $table->string('founder_image');
+            //Social Media
+            $table->string('facebook')->nullable();
+            $table->string('twitter')->nullable();
+            $table->string('linkedin')->nullable();
+            $table->string('instagram')->nullable();
 
             // SEO Information
             $table->string('meta_title')->nullable();
@@ -52,6 +49,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('abouts');
+        Schema::dropIfExists('contacts');
     }
 };

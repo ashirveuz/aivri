@@ -16,7 +16,7 @@
                         <li><a href="#"> Help Centre </a></li>
                         <li><a href="#"> FAQ </a></li>
                         <li><a href="{{ route('website.about') }}"> About Us </a></li>
-                        <li><a href="#"> Contact Us </a></li>
+                        <li><a href="{{ route('website.contact') }}"> Contact Us </a></li>
                     </ul>
                 </div>
             </div>
@@ -72,7 +72,7 @@
                 </div> -->
                                 <a href="product-listing.html">Products</a>
                                 <a href="#">Careers</a>
-                                <a href="#">Contact Us</a>
+                                <a href="{{ route('website.contact') }}">Contact Us</a>
                             </nav>
                         </div>
                     </div>
