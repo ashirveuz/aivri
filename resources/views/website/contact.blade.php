@@ -94,66 +94,26 @@
                         </div>
                         <div class="col-md-8 qanswer">
                             <div class="accordion" id="faqAccordion">
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header">
-                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                            data-bs-target="#faq1" aria-expanded="true" aria-controls="faq1">
-                                            What is your return policy?
-                                        </button>
-                                    </h2>
-                                    <div id="faq1" class="accordion-collapse collapse show"
-                                        data-bs-parent="#faqAccordion">
-                                        <div class="accordion-body">
-                                            We offer a 30-day return policy for all unused items in their original
-                                            packaging.
+                                @foreach ($questions as $key => $question)
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button {{ $key != 0 ? 'collapsed' : '' }}"
+                                                type="button" data-bs-toggle="collapse"
+                                                data-bs-target="{{ '#faq' . $key }}"
+                                                aria-expanded="{{ $key == 0 ? 'true' : 'false' }}"
+                                                aria-controls="{{ 'faq' . $key }}">
+                                                {{ $question->question }}
+                                            </button>
+                                        </h2>
+                                        <div id="{{ 'faq' . $key }}"
+                                            class="accordion-collapse collapse {{ $key == 0 ? 'show' : '' }}"
+                                            data-bs-parent="#faqAccordion">
+                                            <div class="accordion-body">
+                                                {!! $question->answer !!}
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                            data-bs-target="#faq2" aria-expanded="false" aria-controls="faq2">
-                                            How long does shipping take?
-                                        </button>
-                                    </h2>
-                                    <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                                        <div class="accordion-body">
-                                            Shipping typically takes 3-5 business days for domestic orders and 7-14 days for
-                                            international orders.
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                            data-bs-target="#faq3" aria-expanded="false" aria-controls="faq3">
-                                            Do you offer international shipping?
-                                        </button>
-                                    </h2>
-                                    <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                                        <div class="accordion-body">
-                                            Yes, we ship to most countries worldwide. Shipping costs and delivery times may
-                                            vary
-                                            depending on the destination.
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                            data-bs-target="#faq4" aria-expanded="false" aria-controls="faq4">
-                                            How can I track my order?
-                                        </button>
-                                    </h2>
-                                    <div id="faq4" class="accordion-collapse collapse"
-                                        data-bs-parent="#faqAccordion">
-                                        <div class="accordion-body">
-                                            Once your order ships, you'll receive a tracking number via email. You can use
-                                            this
-                                            number to track your package on our website or the carrier's site.
-                                        </div>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
