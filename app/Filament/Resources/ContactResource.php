@@ -20,11 +20,11 @@ class ContactResource extends Resource
 {
     protected static ?string $model = Contact::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-map-pin';
+    // protected static ?string $navigationIcon = 'heroicon-o-map-pin';
     protected static ?string $navigationLabel = 'Contact';
     protected static ?string $pluralModelLabel = 'Contact';
     protected static ?string $slug = 'contact';
-    protected static ?string $navigationGroup = 'Contact Us';
+    protected static ?string $navigationGroup = 'Contact';
 
 
     public static function form(Form $form): Form

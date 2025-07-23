@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('subject');
             $table->text('message');
             $table->tinyInteger('status')->default(1);
+            $table->boolean('is_read')->default(false);
             $table->timestamps();
         });
     }
