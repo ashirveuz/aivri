@@ -17,9 +17,11 @@ Route::prefix('wish-list')->controller(WishListController::class)->group(functio
     Route::get('/', 'index')->name('website.wish-list');
 });
 
-Route::prefix('product')->controller(ProductController::class)->group(function () {
-    Route::get('/', 'index')->name('website.product');
+Route::prefix('/')->controller(ProductController::class)->group(function () {
+    Route::get('/products', 'index')->name('website.products');
+    Route::get('/product', 'show')->name('website.product');
 });
+
 
 Route::prefix('about-us')->controller(AboutController::class)->group(function () {
     Route::get('/', 'index')->name('website.about');

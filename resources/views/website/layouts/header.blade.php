@@ -70,7 +70,7 @@
                     <a href="#">Products 2 </a>
                 </div>
                 </div> -->
-                                <a href="product-listing.html">Products</a>
+                                <a href="{{ route('website.products') }}">Products</a>
                                 <a href="#">Careers</a>
                                 <a href="{{ route('website.contact') }}">Contact Us</a>
                             </nav>

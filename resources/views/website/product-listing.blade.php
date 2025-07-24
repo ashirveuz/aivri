@@ -126,306 +126,69 @@
                 <!-- Products -->
                 <div class="col-lg-9 right-pr-list">
                     <div class="row g-4">
-                        <div class="col-md-4 pr-list-item">
-                            <div class="pr-list-item-in">
-                                <a href="product-details.html">
-                                    <div class="most-freq-item-bg">
-                                        <img src="assets/img/most-freq-product1.png" class="img-fluid" alt="aivri">
-                                        <!-- </a> -->
-                                    </div>
-                                    <!--show icons-->
-                                    <div class="show-icons">
-                                        <div class="show-icons1">
-                                            <i class="fa-solid fa-star"></i>
-                                        </div>
-                                        <div class="show-icons2">
-                                            <svg class="" xmlns="http://www.w3.org/2000/svg"
-                                                xmlns:xlink="http://www.w3.org/1999/xlink" width="13.75" height="15"
-                                                viewBox="0 0 13.75 15">
-                                                <defs>
-                                                    <clipPath id="clip-path">
-                                                        <rect id="Rectangle_8212" data-name="Rectangle 8212"
-                                                            width="13.75" height="15" fill="none"></rect>
-                                                    </clipPath>
-                                                </defs>
-                                                <g id="Group_7249" data-name="Group 7249">
-                                                    <path id="Path_38782" data-name="Path 38782"
-                                                        d="M13.125,65.25H.625A.625.625,0,0,1,0,64.586l.625-10A.625.625,0,0,1,1.25,54H12.5a.625.625,0,0,1,.624.586l.625,10a.625.625,0,0,1-.624.664M1.291,64H12.46l-.547-8.75H1.837Z"
-                                                        transform="translate(0 -50.25)" fill="currentcolor"></path>
-                                                    <path id="Path_38783" data-name="Path 38783"
-                                                        d="M51.875,6.25a.625.625,0,0,1-.625-.625v-2.5A1.877,1.877,0,0,0,49.375,1.25h-1.25A1.877,1.877,0,0,0,46.25,3.125v2.5a.625.625,0,0,1-1.25,0v-2.5A3.129,3.129,0,0,1,48.125,0h1.25A3.129,3.129,0,0,1,52.5,3.125v2.5a.625.625,0,0,1-.625.625"
-                                                        transform="translate(-41.875 0)" fill="currentcolor"></path>
-                                                </g>
-                                            </svg>
-                                        </div>
-                                    </div>
 
-                                    <div class="most-freq-item-cont">
-                                        <div class="left-most-freq-item-cont">
-                                            <h6>Re—touch Soft Focus Setting Powder</h6>
-                                            <div class="most-freq-dtls">
-                                                <span class="value">4.7</span><span class="star"><i
-                                                        class="fa-solid fa-star"></i></span><span class="value-count">|
-                                                    184 reviews</span>
+                        @foreach ($products as $product)
+                            <div class="col-md-4 pr-list-item">
+                                <div class="pr-list-item-in">
+                                    <a href="{{ route('website.product', ['id' => encrypt($product->id)]) }}">
+                                        <div class="most-freq-item-bg">
+                                            <img src="{{ file_exists(public_path('storage/' . $product->featured_image)) ? asset('storage/' . $product->featured_image) : asset('assets/img/no_image.jpg') }}"
+                                                alt="{{ $product->image_alt }}" class="img-fluid">
+                                        </div>
+                                        <div class="show-icons">
+                                            <div class="show-icons1">
+                                                <i class="fa-solid fa-star"></i>
+                                            </div>
+                                            <div class="show-icons2">
+                                                <svg class="" xmlns="http://www.w3.org/2000/svg"
+                                                    xmlns:xlink="http://www.w3.org/1999/xlink" width="13.75"
+                                                    height="15" viewBox="0 0 13.75 15">
+                                                    <defs>
+                                                        <clipPath id="clip-path">
+                                                            <rect id="Rectangle_8212" data-name="Rectangle 8212"
+                                                                width="13.75" height="15" fill="none"></rect>
+                                                        </clipPath>
+                                                    </defs>
+                                                    <g id="Group_7249" data-name="Group 7249">
+                                                        <path id="Path_38782" data-name="Path 38782"
+                                                            d="M13.125,65.25H.625A.625.625,0,0,1,0,64.586l.625-10A.625.625,0,0,1,1.25,54H12.5a.625.625,0,0,1,.624.586l.625,10a.625.625,0,0,1-.624.664M1.291,64H12.46l-.547-8.75H1.837Z"
+                                                            transform="translate(0 -50.25)" fill="currentcolor"></path>
+                                                        <path id="Path_38783" data-name="Path 38783"
+                                                            d="M51.875,6.25a.625.625,0,0,1-.625-.625v-2.5A1.877,1.877,0,0,0,49.375,1.25h-1.25A1.877,1.877,0,0,0,46.25,3.125v2.5a.625.625,0,0,1-1.25,0v-2.5A3.129,3.129,0,0,1,48.125,0h1.25A3.129,3.129,0,0,1,52.5,3.125v2.5a.625.625,0,0,1-.625.625"
+                                                            transform="translate(-41.875 0)" fill="currentcolor"></path>
+                                                    </g>
+                                                </svg>
                                             </div>
                                         </div>
-                                        <div class="right-most-freq-item-cont">
-                                            <h6>₹1,500 </h6>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
 
-                        <div class="col-md-4 pr-list-item">
-                            <div class="pr-list-item-in">
-                                <a href="product-details.html">
-                                    <div class="most-freq-item-bg">
-                                        <img src="assets/img/most-freq-product2.png" class="img-fluid" alt="aivri">
-                                    </div>
-                                    <!--show icons-->
-                                    <div class="show-icons">
-                                        <div class="show-icons1">
-                                            <i class="fa-solid fa-star"></i>
-                                        </div>
-                                        <div class="show-icons2">
-                                            <svg class="" xmlns="http://www.w3.org/2000/svg"
-                                                xmlns:xlink="http://www.w3.org/1999/xlink" width="13.75" height="15"
-                                                viewBox="0 0 13.75 15">
-                                                <defs>
-                                                    <clipPath id="clip-path">
-                                                        <rect id="Rectangle_8212" data-name="Rectangle 8212"
-                                                            width="13.75" height="15" fill="none"></rect>
-                                                    </clipPath>
-                                                </defs>
-                                                <g id="Group_7249" data-name="Group 7249">
-                                                    <path id="Path_38782" data-name="Path 38782"
-                                                        d="M13.125,65.25H.625A.625.625,0,0,1,0,64.586l.625-10A.625.625,0,0,1,1.25,54H12.5a.625.625,0,0,1,.624.586l.625,10a.625.625,0,0,1-.624.664M1.291,64H12.46l-.547-8.75H1.837Z"
-                                                        transform="translate(0 -50.25)" fill="currentcolor"></path>
-                                                    <path id="Path_38783" data-name="Path 38783"
-                                                        d="M51.875,6.25a.625.625,0,0,1-.625-.625v-2.5A1.877,1.877,0,0,0,49.375,1.25h-1.25A1.877,1.877,0,0,0,46.25,3.125v2.5a.625.625,0,0,1-1.25,0v-2.5A3.129,3.129,0,0,1,48.125,0h1.25A3.129,3.129,0,0,1,52.5,3.125v2.5a.625.625,0,0,1-.625.625"
-                                                        transform="translate(-41.875 0)" fill="currentcolor"></path>
-                                                </g>
-                                            </svg>
-                                        </div>
-                                    </div>
-                                    <div class="most-freq-item-cont">
-                                        <div class="left-most-freq-item-cont">
-                                            <h6>Re—touch Soft Focus Setting Powder</h6>
-                                            <div class="most-freq-dtls">
-                                                <span class="value">4.7</span><span class="star"><i
-                                                        class="fa-solid fa-star"></i></span><span class="value-count">|
-                                                    184 reviews</span>
+                                        <div class="most-freq-item-cont">
+                                            <div class="left-most-freq-item-cont">
+                                                <h6>{{ $product->name }}</h6>
+                                                <div class="most-freq-dtls">
+                                                    <span class="value">4.7</span><span class="star"><i
+                                                            class="fa-solid fa-star"></i></span><span
+                                                        class="value-count">|
+                                                        184 reviews</span>
+                                                </div>
+                                            </div>
+                                            <div class="right-most-freq-item-cont">
+                                                @if ($product->offer_percentage && $product->offer_percentage > 0)
+                                                    <span
+                                                        class="dtls-amt">{{ $product->currency_symbol . $product->current_price }}</span>
+                                                    <span
+                                                        class="text-muted dtls-amt-muted"><s>{{ $product->currency_symbol . $product->price }}</s></span>
+                                                @else
+                                                    <span
+                                                        class="dtls-amt">{{ $product->currency_symbol . $product->price }}</span>
+                                                @endif
                                             </div>
                                         </div>
-                                        <div class="right-most-freq-item-cont">
-                                            <h6>₹1,500 </h6>
-                                        </div>
-                                    </div>
-                                </a>
+                                    </a>
+                                </div>
                             </div>
-                        </div>
-
-                        <div class="col-md-4 pr-list-item">
-                            <div class="pr-list-item-in">
-                                <a href="product-details.html">
-                                    <div class="most-freq-item-bg">
-                                        <img src="assets/img/most-freq-product3.png" class="img-fluid" alt="aivri">
-                                    </div>
-                                    <!--show icons-->
-                                    <div class="show-icons">
-                                        <div class="show-icons1">
-                                            <i class="fa-solid fa-star"></i>
-                                        </div>
-                                        <div class="show-icons2">
-                                            <svg class="" xmlns="http://www.w3.org/2000/svg"
-                                                xmlns:xlink="http://www.w3.org/1999/xlink" width="13.75" height="15"
-                                                viewBox="0 0 13.75 15">
-                                                <defs>
-                                                    <clipPath id="clip-path">
-                                                        <rect id="Rectangle_8212" data-name="Rectangle 8212"
-                                                            width="13.75" height="15" fill="none"></rect>
-                                                    </clipPath>
-                                                </defs>
-                                                <g id="Group_7249" data-name="Group 7249">
-                                                    <path id="Path_38782" data-name="Path 38782"
-                                                        d="M13.125,65.25H.625A.625.625,0,0,1,0,64.586l.625-10A.625.625,0,0,1,1.25,54H12.5a.625.625,0,0,1,.624.586l.625,10a.625.625,0,0,1-.624.664M1.291,64H12.46l-.547-8.75H1.837Z"
-                                                        transform="translate(0 -50.25)" fill="currentcolor"></path>
-                                                    <path id="Path_38783" data-name="Path 38783"
-                                                        d="M51.875,6.25a.625.625,0,0,1-.625-.625v-2.5A1.877,1.877,0,0,0,49.375,1.25h-1.25A1.877,1.877,0,0,0,46.25,3.125v2.5a.625.625,0,0,1-1.25,0v-2.5A3.129,3.129,0,0,1,48.125,0h1.25A3.129,3.129,0,0,1,52.5,3.125v2.5a.625.625,0,0,1-.625.625"
-                                                        transform="translate(-41.875 0)" fill="currentcolor"></path>
-                                                </g>
-                                            </svg>
-                                        </div>
-                                    </div>
-                                    <div class="most-freq-item-cont">
-                                        <div class="left-most-freq-item-cont">
-                                            <h6>Re—touch Soft Focus Setting Powder</h6>
-                                            <div class="most-freq-dtls">
-                                                <span class="value">4.7</span><span class="star"><i
-                                                        class="fa-solid fa-star"></i></span><span class="value-count">|
-                                                    184 reviews</span>
-                                            </div>
-                                        </div>
-                                        <div class="right-most-freq-item-cont">
-                                            <h6>₹1,500 </h6>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4 pr-list-item">
-                            <div class="pr-list-item-in">
-                                <a href="product-details.html">
-                                    <div class="most-freq-item-bg">
-                                        <img src="assets/img/most-freq-product4.png" class="img-fluid" alt="aivri">
-                                    </div>
-                                    <!--show icons-->
-                                    <div class="show-icons">
-                                        <div class="show-icons1">
-                                            <i class="fa-solid fa-star"></i>
-                                        </div>
-                                        <div class="show-icons2">
-                                            <svg class="" xmlns="http://www.w3.org/2000/svg"
-                                                xmlns:xlink="http://www.w3.org/1999/xlink" width="13.75" height="15"
-                                                viewBox="0 0 13.75 15">
-                                                <defs>
-                                                    <clipPath id="clip-path">
-                                                        <rect id="Rectangle_8212" data-name="Rectangle 8212"
-                                                            width="13.75" height="15" fill="none"></rect>
-                                                    </clipPath>
-                                                </defs>
-                                                <g id="Group_7249" data-name="Group 7249">
-                                                    <path id="Path_38782" data-name="Path 38782"
-                                                        d="M13.125,65.25H.625A.625.625,0,0,1,0,64.586l.625-10A.625.625,0,0,1,1.25,54H12.5a.625.625,0,0,1,.624.586l.625,10a.625.625,0,0,1-.624.664M1.291,64H12.46l-.547-8.75H1.837Z"
-                                                        transform="translate(0 -50.25)" fill="currentcolor"></path>
-                                                    <path id="Path_38783" data-name="Path 38783"
-                                                        d="M51.875,6.25a.625.625,0,0,1-.625-.625v-2.5A1.877,1.877,0,0,0,49.375,1.25h-1.25A1.877,1.877,0,0,0,46.25,3.125v2.5a.625.625,0,0,1-1.25,0v-2.5A3.129,3.129,0,0,1,48.125,0h1.25A3.129,3.129,0,0,1,52.5,3.125v2.5a.625.625,0,0,1-.625.625"
-                                                        transform="translate(-41.875 0)" fill="currentcolor"></path>
-                                                </g>
-                                            </svg>
-                                        </div>
-                                    </div>
-
-                                    <div class="most-freq-item-cont">
-                                        <div class="left-most-freq-item-cont">
-                                            <h6>Re—touch Soft Focus Setting Powder</h6>
-                                            <div class="most-freq-dtls">
-                                                <span class="value">4.7</span><span class="star"><i
-                                                        class="fa-solid fa-star"></i></span><span class="value-count">|
-                                                    184 reviews</span>
-                                            </div>
-                                        </div>
-                                        <div class="right-most-freq-item-cont">
-                                            <h6>₹1,500 </h6>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4 pr-list-item">
-                            <div class="pr-list-item-in">
-                                <a href="product-details.html">
-                                    <div class="most-freq-item-bg">
-                                        <img src="assets/img/most-freq-product1.png" class="img-fluid" alt="aivri">
-                                    </div>
-                                    <!--show icons-->
-                                    <div class="show-icons">
-                                        <div class="show-icons1">
-                                            <i class="fa-solid fa-star"></i>
-                                        </div>
-                                        <div class="show-icons2">
-                                            <svg class="" xmlns="http://www.w3.org/2000/svg"
-                                                xmlns:xlink="http://www.w3.org/1999/xlink" width="13.75" height="15"
-                                                viewBox="0 0 13.75 15">
-                                                <defs>
-                                                    <clipPath id="clip-path">
-                                                        <rect id="Rectangle_8212" data-name="Rectangle 8212"
-                                                            width="13.75" height="15" fill="none"></rect>
-                                                    </clipPath>
-                                                </defs>
-                                                <g id="Group_7249" data-name="Group 7249">
-                                                    <path id="Path_38782" data-name="Path 38782"
-                                                        d="M13.125,65.25H.625A.625.625,0,0,1,0,64.586l.625-10A.625.625,0,0,1,1.25,54H12.5a.625.625,0,0,1,.624.586l.625,10a.625.625,0,0,1-.624.664M1.291,64H12.46l-.547-8.75H1.837Z"
-                                                        transform="translate(0 -50.25)" fill="currentcolor"></path>
-                                                    <path id="Path_38783" data-name="Path 38783"
-                                                        d="M51.875,6.25a.625.625,0,0,1-.625-.625v-2.5A1.877,1.877,0,0,0,49.375,1.25h-1.25A1.877,1.877,0,0,0,46.25,3.125v2.5a.625.625,0,0,1-1.25,0v-2.5A3.129,3.129,0,0,1,48.125,0h1.25A3.129,3.129,0,0,1,52.5,3.125v2.5a.625.625,0,0,1-.625.625"
-                                                        transform="translate(-41.875 0)" fill="currentcolor"></path>
-                                                </g>
-                                            </svg>
-                                        </div>
-                                    </div>
-
-                                    <div class="most-freq-item-cont">
-                                        <div class="left-most-freq-item-cont">
-                                            <h6>Re—touch Soft Focus Setting Powder</h6>
-                                            <div class="most-freq-dtls">
-                                                <span class="value">4.7</span><span class="star"><i
-                                                        class="fa-solid fa-star"></i></span><span class="value-count">|
-                                                    184 reviews</span>
-                                            </div>
-                                        </div>
-                                        <div class="right-most-freq-item-cont">
-                                            <h6>₹1,500 </h6>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4 pr-list-item">
-                            <div class="pr-list-item-in">
-                                <a href="product-details.html">
-                                    <div class="most-freq-item-bg">
-                                        <img src="assets/img/most-freq-product2.png" class="img-fluid" alt="aivri">
-                                    </div>
-                                    <!--show icons-->
-                                    <div class="show-icons">
-                                        <div class="show-icons1">
-                                            <i class="fa-solid fa-star"></i>
-                                        </div>
-                                        <div class="show-icons2">
-                                            <svg class="" xmlns="http://www.w3.org/2000/svg"
-                                                xmlns:xlink="http://www.w3.org/1999/xlink" width="13.75" height="15"
-                                                viewBox="0 0 13.75 15">
-                                                <defs>
-                                                    <clipPath id="clip-path">
-                                                        <rect id="Rectangle_8212" data-name="Rectangle 8212"
-                                                            width="13.75" height="15" fill="none"></rect>
-                                                    </clipPath>
-                                                </defs>
-                                                <g id="Group_7249" data-name="Group 7249">
-                                                    <path id="Path_38782" data-name="Path 38782"
-                                                        d="M13.125,65.25H.625A.625.625,0,0,1,0,64.586l.625-10A.625.625,0,0,1,1.25,54H12.5a.625.625,0,0,1,.624.586l.625,10a.625.625,0,0,1-.624.664M1.291,64H12.46l-.547-8.75H1.837Z"
-                                                        transform="translate(0 -50.25)" fill="currentcolor"></path>
-                                                    <path id="Path_38783" data-name="Path 38783"
-                                                        d="M51.875,6.25a.625.625,0,0,1-.625-.625v-2.5A1.877,1.877,0,0,0,49.375,1.25h-1.25A1.877,1.877,0,0,0,46.25,3.125v2.5a.625.625,0,0,1-1.25,0v-2.5A3.129,3.129,0,0,1,48.125,0h1.25A3.129,3.129,0,0,1,52.5,3.125v2.5a.625.625,0,0,1-.625.625"
-                                                        transform="translate(-41.875 0)" fill="currentcolor"></path>
-                                                </g>
-                                            </svg>
-                                        </div>
-                                    </div>
-                                    <div class="most-freq-item-cont">
-                                        <div class="left-most-freq-item-cont">
-                                            <h6>Re—touch Soft Focus Setting Powder</h6>
-                                            <div class="most-freq-dtls">
-                                                <span class="value">4.7</span><span class="star"><i
-                                                        class="fa-solid fa-star"></i></span><span class="value-count">|
-                                                    184 reviews</span>
-                                            </div>
-                                        </div>
-                                        <div class="right-most-freq-item-cont">
-                                            <h6>₹1,500 </h6>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-
-
+                        @endforeach
                     </div>
+                    {{ $products->links() }}
                 </div>
             </div>
             <!-- </div> -->
