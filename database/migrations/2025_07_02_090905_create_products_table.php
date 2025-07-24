@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('size', 50)->nullable();
             $table->string('featured_image')->nullable();
             $table->json('additional_images')->nullable();
+            $table->string('image_alt')->nullable();
             $table->boolean('status')->default(1);
             $table->timestamps();
 

@@ -10,15 +10,15 @@
                         <div class="first-pr-dtls-slide">
                             <div class="pr-dtls-slide">
                                 <img src="{{ file_exists(public_path('storage/' . $product->featured_image)) ? asset('storage/' . $product->featured_image) : asset('assets/img/no_image.jpg') }}"
-                                    alt="Product" class="img-fluid rounded mb-3 product-image" id="mainImage">
+                                    alt="{{ $product->image_alt }}" class="img-fluid rounded mb-3 product-image" id="mainImage">
                                 <div class="pr-dtl-small-img">
                                     <img src="{{ file_exists(public_path('storage/' . $product->featured_image)) ? asset('storage/' . $product->featured_image) : asset('assets/img/no_image.jpg') }}"
-                                        alt="Thumbnail 1" class="thumbnail rounded active"
+                                        alt="{{ $product->image_alt }}" class="thumbnail rounded active"
                                         onclick="changeImage(event, this.src)">
 
                                     @foreach ($product->additional_images as $index => $image)
                                         <img src="{{ file_exists(public_path('storage/' . $image)) ? asset('storage/' . $image) : asset('assets/img/no_image.jpg') }}"
-                                            class="thumbnail rounded" alt="Thumbnail {{ $index + 1 }}"
+                                            class="thumbnail rounded" alt="{{ $product->image_alt }}"
                                             onclick="changeImage(event, this.src)">
                                     @endforeach
                                 </div>

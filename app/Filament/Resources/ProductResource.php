@@ -164,6 +164,9 @@ class ProductResource extends Resource
                             ->maxFiles(6)
                             ->optimize('webp')
                             ->maxSize(5120),
+                            
+                        TextInput::make('image_alt')
+                            ->label('Image Alt Text'),
                     ])
                     ->columns(2),
             ]);

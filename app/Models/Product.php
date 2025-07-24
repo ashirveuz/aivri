@@ -27,6 +27,7 @@ class Product extends Model
         'size',
         'featured_image',
         'additional_images',
+        'image_alt',
         'status',
     ];
 
