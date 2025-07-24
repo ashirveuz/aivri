@@ -26,7 +26,10 @@ class ProductController extends Controller
     {
         try {
 
-            $product = Product::where('id', decrypt($request->id))->first();
+            $productId = decrypt($request->id);
+            $product = Cache::remember("product_{$productId}", 60, function () use ($productId) {
+                return Product::findOrFail($productId);
+            });
 
             if ($product) {
                 return view('website.product-details', compact('product'));

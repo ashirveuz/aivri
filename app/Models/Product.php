@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\ProductUpdated;
 use App\Traits\DeleteFile;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -47,6 +48,8 @@ class Product extends Model
             if (empty($product->product_code)) {
                 $product->product_code = strtoupper(Str::random(10));
             }
+            
+            event(new ProductUpdated($product, 'created'));
         });
 
         static::deleted(function ($product) {
@@ -60,6 +63,8 @@ class Product extends Model
                     $product->deleteFile($image);
                 }
             }
+
+            event(new ProductUpdated($product, 'deleted'));
         });
 
         static::updating(function ($product) {
@@ -76,6 +81,7 @@ class Product extends Model
                     $product->deleteFile($removedImage);
                 }
             }
+            event(new ProductUpdated($product, 'updated'));
         });
     }
 
