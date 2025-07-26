@@ -76,17 +76,11 @@
                             </nav>
                         </div>
                     </div>
+                    
                     <div class="nav-profile">
-                        <button type="button" class="btn prof-btn" onclick="showAuthModal(this)">
+                        <a href="{{ route('login') }}" class="btn prof-btn">
                             <i class="fa-regular fa-user"></i>
-                        </button>
-
-                        <!-- profile Modal -->
-                        <div class="profile-login">
-                            {{-- @livewire('auth-modals') --}}
-                            <div id="livewire-auth-container"></div>
-                        </div>
-                        <!-- profile Modal -->
+                        </a>
                     </div>
 
                     <!-- cart -->

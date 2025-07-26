@@ -18,16 +18,6 @@
 </head>
 
 <body>
-
-    <!-- loader -->
-    <!-- <div class="loader">
-      <div class="loader-content">
-          <img src="assets/img/binasheergif.gif" alt="Loader" class="loader-icon">
-      </div>
-    </div> -->
-    <!-- loader -->
-
-
     @include('website.layouts.header')
 
     @yield('content')

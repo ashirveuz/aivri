@@ -1,47 +1,102 @@
-<x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+@extends('website.layouts.app')
+@section('content')
+    <section class="sec-cart login-page-sec">
+        <div class="width-container">
+            <div class="login-page">
+                <div class="row justify-content-center align-items-center">
+                    <div class="col-md-12 col-lg-12 col-xl-9 login-page-in">
+                        <form method="POST" action="{{ route('login') }}" id="Login">
+                            @csrf
+                            <div class="row">
+                                <div class="col-md-6 left">
+                                    <div class="left-in">
+                                        <h3>Hello, Welcome!</h3>
+                                        <p>Aivri ecommerce products </p>
+                                    </div>
+                                </div>
 
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
+                                <div class="col-md-6 right">
+                                    <div class="profile-login">
+                                        <h2>{{ __('auth.login_heading') }}</h2>
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                                        <div class="form-group">
+                                            <label for="mobile">{{ __('auth.mobile') }}</label>
+                                            <input type="number" class="form-control" id="mobile" name="mobile"
+                                                value="{{ old('mobile') }}" placeholder="Enter Your {{ __('auth.mobile') }}"
+                                                autofocus>
+                                            <i class="fa-solid fa-phone input-icon"></i>
+                                            <x-input-error :messages="$errors->get('mobile')" class="danger" />
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="password">{{ __('auth.password') }}</label>
+                                            <input type="password" class="form-control" value="{{ old('password') }}"
+                                                placeholder="Enter Your {{ __('auth.password') }}" id="password"
+                                                name="password">
+                                            <i class="fas fa-lock input-icon"></i>
+                                            <x-input-error :messages="$errors->get('password')" class="danger" />
+                                        </div>
+
+                                        <div class="profile-login-inr">
+                                            <div class="otp-field" id="otpField">
+                                                <input type="text" maxlength="1" />
+                                                <input type="text" maxlength="1" />
+                                                <input class="space" type="text" maxlength="1" />
+                                                <input type="text" maxlength="1" />
+                                                <input type="text" maxlength="1" />
+                                                <input type="text" maxlength="1" />
+                                            </div>
+                                        </div>
+
+                                        <div class="prof-login-out">
+                                            <div class="main-btn-out">
+                                                <button type="submit"
+                                                    class="btn main-btn">{{ __('auth.sign_in') }}</button>
+                                                <button type="button" class="btn second-btn" data-bs-toggle="modal"
+                                                    data-bs-target="#exampleModalToggle3">{{ __('auth.sign_in_otp') }}</button>
+                                            </div>
+                                        </div>
+
+                                        <div class="dont-account">
+                                            <div class="already-account">
+                                                <h6>Don’t have an account yet? <br>
+                                                    <a href="{{ route('register') }}">
+                                                        <button class="btn btn-have-account"
+                                                            type="button">{{ __('auth.sign_up') }}</button>
+                                                    </a>
+                                                    for free
+                                                </h6>
+                                            </div>
+                                            @if (Route::has('password.request'))
+                                                <div class="forgot-password">
+                                                    <a
+                                                        href="{{ route('password.request') }}">{{ __('auth.forgot_password') }}</a>
+                                                </div>
+                                            @endif
+                                        </div>
+
+                                        <div class="social-divider">
+                                            <span>or continue with</span>
+                                        </div>
+
+                                        <div class="social-login">
+                                            <a href="#" class="social-btn google">
+                                                <i class="fab fa-google"></i>
+                                            </a>
+                                            <a href="#" class="social-btn facebook">
+                                                <i class="fab fa-facebook-f"></i>
+                                            </a>
+                                            <a href="#" class="social-btn twitter">
+                                                <i class="fab fa-twitter"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800" name="remember">
-                <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Remember me') }}</span>
-            </label>
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
-
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+    </section>
+@endsection
