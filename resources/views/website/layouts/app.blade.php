@@ -46,7 +46,13 @@
     <script src="assets/js/swiper-bundle.min.js"></script>
     <script src="assets/js/script.js"></script>
     <script src="assets/js/animation.js"></script>
+    <script src="{{ asset('assets/js/common.js') }}"></script>
     <!-- <script src="assets/js/bootstrap.min.js"></script> -->
+    <script>
+        var isLoggedIn = @json(auth()->check());
+    </script>
+    @yield('scripts')
+
     <script>
         AOS.init();
     </script>

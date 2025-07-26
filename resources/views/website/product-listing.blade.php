@@ -137,7 +137,7 @@
                                         </div>
                                         <div class="show-icons">
                                             <div class="show-icons1">
-                                                <i class="fa-solid fa-star"></i>
+                                                <i class="fa-solid fa-star" onclick="addToWishlist('{{ encrypt($product->id) }}',this)"></i>
                                             </div>
                                             <div class="show-icons2">
                                                 <svg class="" xmlns="http://www.w3.org/2000/svg"
@@ -195,4 +195,7 @@
 
         </div>
     </section>
+@endsection
+@section('scripts')
+    <script src="{{ asset('assets/js/product.js') }}"></script>
 @endsection
