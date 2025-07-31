@@ -7,6 +7,7 @@ use App\Http\Controllers\WishListController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\OtpController;
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -19,6 +20,11 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::redirect('/', '/home');
+
+Route::controller(OtpController::class)->group(function () {
+    Route::post('/send-otp', 'sendOtp')->name('send.otp');
+    Route::post('/check-otp-status', 'checkOtpStatus')->name('check.otp.status');
+});
 
 Route::prefix('home')->controller(HomeController::class)->group(function () {
     Route::get('/', 'index')->name('website.home');

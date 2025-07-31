@@ -14,7 +14,8 @@
                                         <p>Aivri ecommerce products </p>
                                     </div>
                                 </div>
-
+                                <input type="hidden" name="auth_method" value="{{ old('auth_method', 'password') }}"
+                                    id="auth_method" />
                                 <div class="col-md-6 right">
                                     <div class="profile-login">
                                         <h2>{{ __('auth.login_heading') }}</h2>
@@ -25,10 +26,12 @@
                                                 value="{{ old('mobile') }}" placeholder="Enter Your {{ __('auth.mobile') }}"
                                                 autofocus>
                                             <i class="fa-solid fa-phone input-icon"></i>
-                                            <x-input-error :messages="$errors->get('mobile')" class="danger" />
+                                            <x-input-error :messages="$errors->get('mobile')" :addHiddenField="true" :hiddenFieldId="'mobileErrorSec'"
+                                                class="danger" />
                                         </div>
 
-                                        <div class="form-group">
+                                        <div class="form-group" id="passwordSection"
+                                            style="{{ old('auth_method', 'password') == 'otp' ? 'display:none' : '' }}">
                                             <label for="password">{{ __('auth.password') }}</label>
                                             <input type="password" class="form-control" value="{{ old('password') }}"
                                                 placeholder="Enter Your {{ __('auth.password') }}" id="password"
@@ -37,23 +40,39 @@
                                             <x-input-error :messages="$errors->get('password')" class="danger" />
                                         </div>
 
-                                        <div class="profile-login-inr">
-                                            <div class="otp-field" id="otpField">
-                                                <input type="text" maxlength="1" />
-                                                <input type="text" maxlength="1" />
-                                                <input class="space" type="text" maxlength="1" />
-                                                <input type="text" maxlength="1" />
-                                                <input type="text" maxlength="1" />
-                                                <input type="text" maxlength="1" />
+                                        <div class="profile-login-inr" id="otpSection"
+                                            style="{{ old('auth_method', 'password') == 'password' ? 'display:none' : '' }}">
+                                            <div class="otp-field" id="otpBtnDiv">
+                                                <button type="button" onclick="validateNumberAndSendOtp(this)"
+                                                    class="btn second-btn">{{ __('auth.send_otp') }}</button>
                                             </div>
+                                            <div class="otp-field" id="otpFieldDiv" style="display: none">
+                                                <input name="otp[]" type="text" maxlength="1"
+                                                    onkeydown="moveOtpFieldFocus(event, this)" id="otpField1" />
+                                                <input name="otp[]" type="text" maxlength="1"
+                                                    onkeydown="moveOtpFieldFocus(event, this)" id="otpField2" />
+                                                <input name="otp[]" class="space" type="text" maxlength="1"
+                                                    onkeydown="moveOtpFieldFocus(event, this)" id="otpField3" />
+                                                <input name="otp[]" type="text" maxlength="1"
+                                                    onkeydown="moveOtpFieldFocus(event, this)" id="otpField4" />
+                                                <input name="otp[]" type="text" maxlength="1"
+                                                    onkeydown="moveOtpFieldFocus(event, this)" id="otpField5" />
+                                                <input name="otp[]" type="text" maxlength="1"
+                                                    onkeydown="moveOtpFieldFocus(event, this)" id="otpField6" />
+                                            </div>
+                                            <x-input-error :messages="$errors->get('otp.6')" class="danger" />
                                         </div>
 
                                         <div class="prof-login-out">
                                             <div class="main-btn-out">
                                                 <button type="submit"
                                                     class="btn main-btn">{{ __('auth.sign_in') }}</button>
-                                                <button type="button" class="btn second-btn" data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModalToggle3">{{ __('auth.sign_in_otp') }}</button>
+                                                <button type="button" onclick="toggleOtpSection('otp')" id="otpEnableBtn"
+                                                    class="btn second-btn"
+                                                    style="{{ old('auth_method', 'password') == 'otp' ? 'display:none' : '' }}">{{ __('auth.sign_in_otp') }}</button>
+                                                <button type="button" onclick="toggleOtpSection('password')"
+                                                    id="passwordEnableBtn" class="btn second-btn"
+                                                    style="{{ old('auth_method', 'password') == 'password' ? 'display:none' : '' }}">{{ __('auth.sign_in_password') }}</button>
                                             </div>
                                         </div>
 
@@ -99,4 +118,10 @@
             </div>
         </div>
     </section>
+@endsection
+@section('scripts')
+    <script src="{{ asset('assets/js/auth.js') }}"></script>
+    <script>
+        const csrfToken = "{{ csrf_token() }}";
+    </script>
 @endsection
